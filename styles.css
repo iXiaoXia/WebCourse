@@ -1,0 +1,447 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e; /* 暗黑色背景 */
+    color: #ffffff; /* 白色字体 */
+    margin: 0;
+    padding: 20px;
+    position: relative; /* 使绝对定位的雪花在相对定位的基础上 */
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff; /* 白色标题 */
+    position: relative;
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    animation: titleGlow 2s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+    }
+}
+
+.scroll-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.calendar-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+    width: 100%;
+}
+
+.month {
+    background-color: rgba(42, 42, 42, 0.8);
+    border: 1px solid #3a3a3a;
+    border-radius: 12px;
+    padding: 20px;
+    flex: 1 1 300px;
+    min-width: 280px;
+    max-width: 420px;
+    margin: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.month::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+
+@keyframes snowBg {
+    0% { background-position: 0 0; }
+    100% { background-position: 15px 15px; }
+}
+
+@keyframes springFestival {
+    0%, 100% { transform: scale(1); opacity: 0.1; }
+    50% { transform: scale(1.1); opacity: 0.2; }
+}
+
+@keyframes springBloom {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.1); }
+}
+
+@keyframes springRain {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 20px; }
+}
+
+@keyframes fallingPetals {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(10px) rotate(180deg); }
+}
+
+@keyframes summerWave {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 50px; }
+}
+
+@keyframes summerHeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+@keyframes sunsetGlow {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.2; }
+}
+
+@keyframes autumnLeaves {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    50% { transform: translateX(10px) rotate(180deg); }
+}
+
+@keyframes goldenAutumn {
+    0%, 100% { background-position: 0 0; }
+    50% { background-position: 20px 20px; }
+}
+
+@keyframes lateAutumn {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(90deg); }
+}
+
+@keyframes winterFrost {
+    0% { background-position: 0 0; }
+    100% { background-position: 20px 20px; }
+}
+
+
+
+h2 {
+    text-align: center;
+    background: linear-gradient(120deg, #4CAF50, #45a049, #4CAF50);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: all 0.5s ease;
+    animation: gradientFlow 3s linear infinite;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #555; /* 边框颜色 */
+    padding: 8px;
+    text-align: center;
+    background-color: #444;
+    transition: background-color 0.3s ease;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+td {
+    background-color: #444; /* 暗色的单元格 */
+}
+
+tr:hover td {
+    background: linear-gradient(45deg, #2a2a2a, #333);
+    transform: scale(1.01);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.snowflake {
+    position: fixed;
+    top: -20px;  /* 从视窗上方开始 */
+    color: #fff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    pointer-events: none;
+    z-index: 1000;
+    animation: snowfall linear forwards;
+    will-change: transform;
+}
+
+/* 雪花下落动画 */
+@keyframes snowfall {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: var(--opacity, 1);
+    }
+    100% {
+        transform: translateY(100vh) translateX(var(--random-x, 0));
+        opacity: 0;
+    }
+}
+
+.snow-trail {
+    display: none;
+}
+
+/* 节气的特殊样式 */
+td:last-child:not(:contains('无')) {
+    color: #e6c07b;
+    font-weight: 500;
+    text-shadow: 0 0 10px rgba(230, 192, 123, 0.3);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+td:last-child:not(:contains('无')):hover {
+    color: #ffd700;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    transform: scale(1.1);
+}
+
+/* 当天日期的特殊样式 */
+tr.today td {
+    background: linear-gradient(45deg, rgba(76, 175, 80, 0.1), rgba(230, 192, 123, 0.1));
+    font-weight: 600;
+    position: relative;
+    animation: todayPulse 2s infinite;
+}
+
+@keyframes todayPulse {
+    0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+}
+
+
+/* 响应式调整 */
+@media (max-width: 1024px) {
+    .month:nth-last-child(-n+2) {
+        flex: 1 1 300px; /* 在小屏幕上恢复正常宽度 */
+    }
+}
+
+/* 每个月份的特殊背景色和渐变 */
+.month:nth-child(1) {
+    /* 一月 - 寒冬深蓝 */
+    background: linear-gradient(135deg, rgba(28, 35, 65, 0.9), rgba(25, 25, 45, 0.9));
+}
+
+.month:nth-child(2) {
+    /* 二月 - 春节红色 */
+    background: linear-gradient(135deg, rgba(85, 15, 15, 0.9), rgba(45, 15, 15, 0.9));
+}
+
+.month:nth-child(3) {
+    /* 三月 - 春色嫩绿 */
+    background: linear-gradient(135deg, rgba(15, 55, 25, 0.9), rgba(20, 45, 20, 0.9));
+}
+
+.month:nth-child(4) {
+    /* 四月 - 春雨青色 */
+    background: linear-gradient(135deg, rgba(20, 55, 55, 0.9), rgba(25, 45, 45, 0.9));
+}
+
+.month:nth-child(5) {
+    /* 五月 - 暖春粉紫 */
+    background: linear-gradient(135deg, rgba(55, 25, 55, 0.9), rgba(45, 25, 45, 0.9));
+}
+
+.month:nth-child(6) {
+    /* 六月 - 初夏碧绿 */
+    background: linear-gradient(135deg, rgba(15, 65, 45, 0.9), rgba(20, 45, 35, 0.9));
+}
+
+.month:nth-child(7) {
+    /* 七月 - 盛夏翠绿 */
+    background: linear-gradient(135deg, rgba(25, 75, 35, 0.9), rgba(25, 55, 25, 0.9));
+}
+
+.month:nth-child(8) {
+    /* 八月 - 晚夏金黄 */
+    background: linear-gradient(135deg, rgba(75, 65, 15, 0.9), rgba(55, 45, 15, 0.9));
+}
+
+.month:nth-child(9) {
+    /* 九月 - 初秋橙红 */
+    background: linear-gradient(135deg, rgba(85, 45, 15, 0.9), rgba(65, 35, 15, 0.9));
+}
+
+.month:nth-child(10) {
+    /* 十月 - 深秋褐红 */
+    background: linear-gradient(135deg, rgba(75, 25, 15, 0.9), rgba(55, 25, 15, 0.9));
+}
+
+.month:nth-child(11) {
+    /* 十一月 - 晚秋灰紫 */
+    background: linear-gradient(135deg, rgba(45, 35, 55, 0.9), rgba(35, 25, 45, 0.9));
+}
+
+.month:nth-child(12) {
+    /* 十二月 - 寒冬深蓝 */
+    background: linear-gradient(135deg, rgba(15, 25, 55, 0.9), rgba(15, 15, 45, 0.9));
+}
+
+/* 悬停效果增强 */
+.month:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.2);
+    border-color: #4CAF50;
+}
+
+/* 为每个月份添加微妙的光晕效果 */
+.month::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.month:hover::after {
+    opacity: 1;
+}
+
+/* 调整表格内容的颜色，使其在新背景上更加清晰 */
+.month table {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(2px);
+    border-radius: 8px;
+}
+
+.month th {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: #ffffff;
+}
+
+.month td {
+    background-color: rgba(255, 255, 255, 0.02);
+    transition: background-color 0.3s ease;
+}
+
+.month tr:hover td {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* 日期单元格的基础样式 */
+.month td {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+/* 选中状态的样式 */
+.month td.selected {
+    background-color: rgba(76, 175, 80, 0.2) !important;
+    transform: scale(1.05);
+    font-weight: bold;
+    color: #4CAF50;
+    z-index: 1;
+}
+
+/* 选中状态的边框效果 */
+.month td.selected::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid #4CAF50;
+    border-radius: 4px;
+    animation: selectedPulse 1.5s ease-in-out infinite;
+}
+
+/* 涟漪效果 */
+.ripple {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    transform: translate(-50%, -50%) scale(0);
+    background-color: rgba(76, 175, 80, 0.3);
+    border-radius: 50%;
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+/* 选中状态的脉冲动画 */
+@keyframes selectedPulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 涟漪动画 */
+@keyframes ripple {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+    }
+}
+
+/* 节气日期特殊样式 */
+.month td:has(+ td:contains("立春")),
+.month td:has(+ td:contains("雨水")),
+.month td:has(+ td:contains("惊蛰")),
+.month td:has(+ td:contains("春分")),
+.month td:has(+ td:contains("清明")),
+.month td:has(+ td:contains("立夏")),
+.month td:has(+ td:contains("小满")),
+.month td:has(+ td:contains("芒种")),
+.month td:has(+ td:contains("夏至")),
+.month td:has(+ td:contains("小暑")),
+.month td:has(+ td:contains("大暑")),
+.month td:has(+ td:contains("立秋")),
+.month td:has(+ td:contains("处暑")),
+.month td:has(+ td:contains("白露")),
+.month td:has(+ td:contains("秋分")),
+.month td:has(+ td:contains("寒露")),
+.month td:has(+ td:contains("霜降")),
+.month td:has(+ td:contains("立冬")),
+.month td:has(+ td:contains("小雪")),
+.month td:has(+ td:contains("大雪")),
+.month td:has(+ td:contains("冬至")) {
+    color: #4CAF50;
+}
